@@ -1,0 +1,31 @@
+# Python Dependencies
+
+# Environment variable management
+python-dotenv>=1.0.0
+
+# LangChain core libraries
+langchain>=0.3.0
+langchain-openai>=0.2.0
+langchain-core>=0.3.0
+
+# LangGraph for multi-agent systems and CLI
+# Note: langgraph-cli[inmem] includes langgraph-api and other required dependencies
+langgraph>=0.2.0
+langgraph-cli[inmem]>=0.2.0
+
+# Numerical computing
+numpy>=1.24.0
+
+# Data visualization
+matplotlib>=3.7.0
+
+# HTTP client (required by langchain-openai and langgraph)
+httpx>=0.24.0
+
+# Web server (required by langgraph dev server)
+uvicorn[standard]>=0.24.0
+fastapi>=0.100.0
+
+# Additional dependencies that may be pulled in automatically but listed for clarity
+pydantic>=2.0.0
+typing-extensions>=4.5.0

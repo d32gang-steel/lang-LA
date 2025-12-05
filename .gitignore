@@ -2,3 +2,10 @@
 __pycache__
 .langgraph_api
 .github
+
+# 虚拟环境
+venv/
+env/
+ENV/
+.venv
+

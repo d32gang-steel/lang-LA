@@ -2,7 +2,8 @@
   "dependencies": ["."],
   "graphs": {
     "compute-agent": "./src/compute_agent.py:agent",
-    "visual-agent": "./src/visual_agent.py:agent"
+    "visual-agent": "./src/visual_agent.py:agent",
+    "socratic-agent": "./src/socratic_agent.py:agent"
   },
   "env": ".env"
 }

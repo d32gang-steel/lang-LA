@@ -76,6 +76,16 @@ load_dotenv()
 API_KEY = os.getenv("API_KEY")
 API_BASE_URL = os.getenv("API_BASE_URL")
 
+# 验证环境变量
+if not API_KEY:
+    raise ValueError("API_KEY 环境变量未设置！请在 .env 文件中设置 API_KEY")
+if not API_BASE_URL:
+    raise ValueError("API_BASE_URL 环境变量未设置！请在 .env 文件中设置 API_BASE_URL")
+
+# 确保 API_BASE_URL 以 /v1 结尾（LangChain 需要）
+if not API_BASE_URL.endswith('/v1'):
+    API_BASE_URL = API_BASE_URL.rstrip('/') + '/v1'
+
 llm = ChatOpenAI(model="gemini-2.5-pro", temperature=0, api_key=API_KEY, base_url=API_BASE_URL)
 tools = [plot_2d_transformation]
 
@@ -84,9 +94,10 @@ system_prompt = """你是一个线性代数可视化助教。
 你的任务是使用 plot_2d_transformation 工具来回答用户请求。
 
 **重要规则**:
-1.  你必须调用工具来生成图像。
-2.  工具会返回一个 Base64 编码的字符串。
-3.  在收到这个 Base64 字符串后，你 **必须** 将你的最终答案格式化为 Markdown 图像。
+1.  如果用户上传了图片，你可以读取和分析图片中的数学内容（矩阵、公式、图形等）。
+2.  你必须调用工具来生成图像。
+3.  工具会返回一个 Base64 编码的字符串。
+4.  在收到这个 Base64 字符串后，你 **必须** 将你的最终答案格式化为 Markdown 图像。
     
     格式如下:
     `![这是 {matrix_json} 的变换图像](data:image/png;base64,THE_BASE64_STRING_FROM_TOOL)`

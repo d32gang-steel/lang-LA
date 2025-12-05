@@ -45,6 +45,7 @@ import {
   ArtifactTitle,
   useArtifactContext,
 } from "./artifact";
+import { AgentSelector } from "./agent-selector";
 
 function StickyToBottomContent(props: {
   content: ReactNode;
@@ -325,7 +326,8 @@ export function Thread() {
                   </Button>
                 )}
               </div>
-              <div className="absolute top-2 right-4 flex items-center">
+              <div className="absolute top-2 right-4 flex items-center gap-2">
+                <AgentSelector />
                 <OpenGitHubRepo />
               </div>
             </div>
@@ -371,6 +373,7 @@ export function Thread() {
               </div>
 
               <div className="flex items-center gap-4">
+                <AgentSelector />
                 <div className="flex items-center">
                   <OpenGitHubRepo />
                 </div>
