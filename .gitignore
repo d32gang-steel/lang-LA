@@ -1,4 +1,32 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+
+# Virtual environments (uv)
+.venv/
+venv/
+
+# Secrets & Local config
 .env
-__pycache__
-.langgraph_api
-.github
+.env.*
+!.env.example
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+
+# Cache & Logs
+.pytest_cache/
+.ruff_cache/
+*.log
+
+# Build & Dist
+dist/
+build/
+
+# --------------------------
+# Custom Project Files
+# --------------------------
+# Add your files here (e.g., output data, temp binaries)
+main
