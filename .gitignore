@@ -1,16 +1,3 @@
-# Python artifacts
-__pycache__/
-*.py[cod]
-
-# Virtual environments (uv)
-.venv/
-venv/
-
-# Secrets & Local config
-.env
-.env.*
-!.env.example
-
 # IDE & OS
 .vscode/
 .idea/
