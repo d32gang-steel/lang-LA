@@ -1,9 +1,18 @@
 import os
+import sys
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain.agents import create_agent
 from langchain.tools import tool
 import json
+
+# 添加项目根目录到路径，以便导入db模块
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+try:
+    from db import LearningPoint
+except ImportError:
+    # 如果导入失败，使用空实现（向后兼容）
+    LearningPoint = None
 
 # 工具：分析学生回答的质量
 @tool
@@ -41,8 +50,25 @@ def record_learning_point(thread_id: str, topic: str, difficulty_level: str, not
         difficulty_level: 困难程度 "easy"/"medium"/"hard"
         notes: 备注信息（学生的困惑点、错误等）
     """
-    # 这里可以集成到数据库，目前先返回确认信息
-    return f"已记录学习点: {topic} (难度: {difficulty_level})"
+    try:
+        if LearningPoint is not None:
+            # 验证难度级别
+            if difficulty_level.lower() not in ['easy', 'medium', 'hard']:
+                return f"错误：难度级别必须是 'easy'、'medium' 或 'hard'，当前为: {difficulty_level}"
+            
+            # 保存到数据库
+            record_id = LearningPoint.create(
+                thread_id=thread_id,
+                topic=topic,
+                difficulty_level=difficulty_level.lower(),
+                notes=notes
+            )
+            return f"已成功记录学习点 (ID: {record_id}): {topic} (难度: {difficulty_level})"
+        else:
+            # 如果数据库模块未加载，返回确认信息（向后兼容）
+            return f"已记录学习点: {topic} (难度: {difficulty_level}) [数据库未配置]"
+    except Exception as e:
+        return f"记录学习点时出错: {str(e)}"
 
 # 加载环境变量和 LLM
 load_dotenv()

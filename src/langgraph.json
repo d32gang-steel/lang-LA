@@ -3,7 +3,8 @@
   "graphs": {
     "compute-agent": "./agents/compute_agent.py:agent",
     "visual-agent": "./agents/viz_agent.py:agent",
-    "socratic-agent": "./agents/socratic_agent.py:agent"
+    "socratic-agent": "./agents/socratic_agent.py:agent",
+    "analysis-agent": "./agents/analysis_agent.py:agent"
   },
   "env": ".env"
 }

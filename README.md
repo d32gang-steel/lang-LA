@@ -56,7 +56,7 @@ uv sync
 
 # 设置环境变量（复制 .env.example 并填写）
 copy .env.example .env
-# 编辑 .env 文件，填入你的 API_KEY 和 API_BASE_URL
+# 编辑 .env 文件，填入你的 API_KEY 和 API_BASE_URL（千万记得把中文注释删去，不然会报错）
 ```
 
 ### 3. 前端设置
